@@ -36,25 +36,26 @@ resource "aws_nat_gateway" "gw" {
 
 
 resource "aws_instance" "nat_instance" {
-  ami                    = "ami-05fa00d4c63e32376" # Amazon Linux 2 AMI in us-east-1
-  instance_type          = "t2.micro"              # Free Tier
-  subnet_id              = aws_subnet.public_subnet[0].id
-  associate_public_ip_address = true
-  source_dest_check      = false
+  ami                         = "ami-0dba2cb6798deb6d8"  # Ubuntu Server 22.04 LTS - us-east-1
+  instance_type               = "t2.micro"               # Free Tier
+  subnet_id                   = aws_subnet.public_subnet[0].id
+  associate_public_ip_address = true                     # Make sure allowing public network access is safe here.
+  source_dest_check           = false
+
+  user_data = <<-EOF
+              #!/bin/bash
+              apt-get update -y
+              apt-get install -y iptables-persistent
+              sysctl -w net.ipv4.ip_forward=1
+              iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+              netfilter-persistent save
+              EOF
 
   tags = {
     Name = "NAT-Instance"
   }
-
-  # Script pour activer la fonction NAT dans la machine
-  user_data = <<-EOF
-              #!/bin/bash
-              yum update -y
-              yum install -y iptables-services
-              echo 1 > /proc/sys/net/ipv4/ip_forward
-              iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-              EOF
 }
+
 
 
 
