@@ -3,14 +3,31 @@ import java.util.*;
 import java.awt.Desktop;
 
 public class Main {
+
     static Scanner scanner = new Scanner(System.in);
-    static final String USERS_FILE = "/data/users.txt";
+
+    static final String USERS_FILE = "data/users.txt"; // chemin relatif
+
     static final String FILES_FOLDER = "files/";
 
     public static void main(String[] args) throws IOException {
+
+        // Crée dossier data si absent
+        File dataDir = new File("data");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+
+        // Crée fichier users.txt s’il n’existe pas
+        File usersFile = new File(USERS_FILE);
+        if (!usersFile.exists()) {
+            usersFile.createNewFile();
+        }
+
         System.out.println("Bienvenue dans l'application !");
         System.out.println("1. Créer un compte");
         System.out.println("2. Se connecter");
+
         int choix = scanner.nextInt();
         scanner.nextLine(); // consommer le retour à la ligne
 
@@ -48,7 +65,7 @@ public class Main {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(":");
-            if (parts[0].equals(username) && parts[1].equals(password)) {
+            if (parts.length == 2 && parts[0].equals(username) && parts[1].equals(password)) {
                 reader.close();
                 return true;
             }
@@ -59,6 +76,11 @@ public class Main {
 
     public static void showFiles() {
         File folder = new File(FILES_FOLDER);
+        if (!folder.exists() || !folder.isDirectory()) {
+            System.out.println("Le dossier " + FILES_FOLDER + " n'existe pas.");
+            return;
+        }
+
         File[] files = folder.listFiles();
         if (files == null || files.length == 0) {
             System.out.println("Aucun fichier disponible.");
@@ -67,13 +89,20 @@ public class Main {
 
         System.out.println("Fichiers disponibles :");
         for (int i = 0; i < files.length; i++) {
-            System.out.println((i+1) + ". " + files[i].getName());
+            System.out.println((i + 1) + ". " + files[i].getName());
         }
 
         System.out.print("Choisissez un fichier à ouvrir (numéro) : ");
-        int choix = scanner.nextInt();
-        File selectedFile = files[choix - 1];
 
+        int choix = scanner.nextInt();
+        scanner.nextLine(); // consommer retour à la ligne
+
+        if (choix < 1 || choix > files.length) {
+            System.out.println("Choix invalide.");
+            return;
+        }
+
+        File selectedFile = files[choix - 1];
         try {
             Desktop.getDesktop().open(selectedFile);
         } catch (IOException e) {
