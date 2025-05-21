@@ -91,6 +91,7 @@ public class Main {
         for (int i = 0; i < files.length; i++) {
             System.out.println((i + 1) + ". " + files[i].getName());
         }
+        
 
         System.out.print("Choisissez un fichier à ouvrir (numéro) : ");
 
