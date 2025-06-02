@@ -33,3 +33,27 @@ variable "nat_ami_id" {
   type        = string
   default     = "ami-xxxxxxxx"  # Remplacez par l'AMI d'instance NAT appropriée pour votre région
 }
+variable "environment" {
+  description = "Deployment environment"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "VPC ID"
+  type        = string
+}
+
+variable "public_subnets" {
+  description = "List of public subnet IDs"
+  type        = list(string)
+}
+
+variable "app_port" {
+  description = "App port"
+  type        = number
+}
+
+variable "health_check_path" {
+  description = "Health check path"
+  type        = string
+}
