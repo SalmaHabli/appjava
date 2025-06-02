@@ -39,28 +39,4 @@ variable "nat_ami_id" {
   default     = "ami-xxxxxxxx"  # Remplace par le bon ID ou supprime si tu utilises un NAT Gateway
 }
 
-variable "environment" {
-  description = "Deployment environment"
-  type        = string
-}
 
-variable "app_port" {
-  description = "Port de l'application"
-  type        = number
-}
-
-variable "health_check_path" {
-  description = "Chemin de vérification de l'état"
-  type        = string
-}
-variable "db_username" {
-  description = "Database administrator username"
-  type        = string
-  sensitive   = true
-}
-
-variable "db_password" {
-  description = "Database administrator password"
-  type        = string
-  sensitive   = true
-}
