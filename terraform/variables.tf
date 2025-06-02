@@ -1,7 +1,7 @@
 variable "region" {
   description = "La région AWS"
   type        = string
-  default     = "us-east-1"  # Choisissez la région appropriée
+  default     = "us-east-1"
 }
 
 variable "vpc_cidr" {
@@ -19,7 +19,11 @@ variable "public_subnets" {
 variable "private_subnets" {
   description = "Liste des CIDR blocks pour les subnets privés"
   type        = list(string)
-  default     = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24", "10.0.7.0/24", "10.0.8.0/24", "10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24", "10.0.14.0/24", "10.0.15.0/24"]
+  default     = [
+    "10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24", "10.0.7.0/24",
+    "10.0.8.0/24", "10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24",
+    "10.0.12.0/24", "10.0.13.0/24", "10.0.14.0/24", "10.0.15.0/24"
+  ]
 }
 
 variable "azs" {
@@ -28,32 +32,24 @@ variable "azs" {
   default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
 
+# Si tu utilises une instance NAT manuellement
 variable "nat_ami_id" {
   description = "AMI ID de l'instance NAT"
   type        = string
-  default     = "ami-xxxxxxxx"  # Remplacez par l'AMI d'instance NAT appropriée pour votre région
+  default     = "ami-xxxxxxxx"  # Remplace par le bon ID ou supprime si tu utilises un NAT Gateway
 }
+
 variable "environment" {
   description = "Deployment environment"
   type        = string
 }
 
-variable "vpc_id" {
-  description = "VPC ID"
-  type        = string
-}
-
-variable "public_subnets" {
-  description = "List of public subnet IDs"
-  type        = list(string)
-}
-
 variable "app_port" {
-  description = "App port"
+  description = "Port de l'application"
   type        = number
 }
 
 variable "health_check_path" {
-  description = "Health check path"
+  description = "Chemin de vérification de l'état"
   type        = string
 }
