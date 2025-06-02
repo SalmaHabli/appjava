@@ -14,3 +14,5 @@ private_subnets = [
 environment        = "dev"
 app_port           = 8080
 health_check_path  = "/"
+db_username = "admin"
+db_password = "chaymae22"
