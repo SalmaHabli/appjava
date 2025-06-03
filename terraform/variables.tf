@@ -48,6 +48,11 @@ variable "vpc_id" {
   description = "ID of the VPC"
   type        = string
 }
+variable "subnet_ids" {
+  description = "List of subnet IDs where the ALB will be deployed"
+  type        = list(string)
+}
+
 
 
 
