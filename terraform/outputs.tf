@@ -14,7 +14,5 @@ output "private_subnet_ids" {
 output "nat_instance_id" {
   value = aws_instance.nat_instance.id
 }
-output "alb_dns_name" {
-  value = aws_lb.app_alb.dns_name
-}
+
 
