@@ -38,15 +38,17 @@ variable "nat_ami_id" {
   type        = string
   default     = "ami-xxxxxxxx"  # Remplace par le bon ID ou supprime si tu utilises un NAT Gateway
 }
-variable "vpc_id" {}
-variable "subnet_ids" {
-  type = list(string)
-}
+
 variable "key_name" {}
 variable "instance_type" {
   default = "t3.micro"
 }
 variable "ami_id" {}  # Tu mettras une AMI Amazon Linux 2
+variable "vpc_id" {
+  description = "ID of the VPC"
+  type        = string
+}
+
 
 
 
