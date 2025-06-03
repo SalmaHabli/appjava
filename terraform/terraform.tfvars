@@ -11,7 +11,7 @@ private_subnets = [
   "10.0.8.0/24", "10.0.9.0/24", "10.0.10.0/24", "10.0.11.0/24",
   "10.0.12.0/24", "10.0.13.0/24", "10.0.14.0/24", "10.0.15.0/24"
 ]
-vpc_id     = "vpc-0dfbefee52c2260bc"
+vpc_id = "vpc-0a91d95b8a7327fd8"
 subnet_ids = ["subnet-0fe0395a651d1c3f8", "subnet-0ec107a2cff887aff", "subnet-0796aec7ac61177f9", ]
 key_name   = "pfs-key"
 ami_id     = "ami-02457590d33d576c3"
